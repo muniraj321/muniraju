@@ -1,0 +1,27 @@
+8000
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue0;}
+\viewkind4\uc1\pard\li195\cf1\f0\fs20 MVI C 08h
+\par MVI D 04h
+\par XRA A
+\par MOV B A
+\par LOOP: ADD C
+\par DAA
+\par JNC NEXT
+\par INR B
+\par NEXT: DCR D
+\par JNZ LOOP
+\par STA 8600h
+\par MOV A B
+\par STA 8601h
+\par HLT\cf0 
+\par }
+<End Codes>
+20
+1| 8600| 00
+2| 8601| 00
+<End UserData>
+20
+<End HexData>
+
+<End Comment>

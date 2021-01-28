@@ -1,0 +1,46 @@
+8000
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue0;}
+\viewkind4\uc1\pard\li195\cf1\f0\fs20 
+\par MVI C 00h
+\par LDA 8500h
+\par CMA
+\par ADI 01h
+\par JNC LOOP
+\par INR C
+\par LOOP: STA 8501
+\par MOV A C
+\par STA 8502h
+\par HLT\cf0 
+\par }
+<End Codes>
+20
+1| 8500| 9F
+2| 8501| 61
+3| 8502| 00
+<End UserData>
+23
+1| 8000| 0E
+2| 8001| 00
+3| 8002| 3A
+4| 8003| 00
+5| 8004| 85
+6| 8005| 2F
+7| 8006| C6
+8| 8007| 01
+9| 8008| D2
+10| 8009| 0C
+11| 800A| 80
+12| 800B| 0C
+13| 800C| 32
+14| 800D| 01
+15| 800E| 85
+16| 800F| 79
+17| 8010| 32
+18| 8011| 02
+19| 8012| 85
+20| 8013| 76
+<End HexData>
+
+
+<End Comment>

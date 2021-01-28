@@ -1,0 +1,342 @@
+program 1:
+Exchange of 16 bit numbers
+
+MVI B 02h
+LXI H 8050h
+LXI D 8070h
+NEXT: LDAX D
+MOV C A
+MOV A M
+STAX D
+MOV M C
+INX H
+INX D
+DCR B
+JNZ NEXT
+HLT
+
+program 2:A
+addition of 8 bit hexa numbers
+
+LXI H 8500h
+MVI C 00h
+MOV A M
+INX H
+ADD M
+JNC NEXT
+INR C
+NEXT: STA 8502h
+MOV A C
+STA 8503h
+HLT
+
+program 2:B
+subtraction of 8 bit hexa numbers
+
+LXI H 8500h
+MVI C 00h
+MOV A M
+INX H
+SUB M
+JNC NEXT
+INR C
+NEXT: STA 8502h
+MOV A C
+STA 8503h
+HLT
+
+program 3:
+addition two n byte numbers
+
+MVI C 04h
+LXI H 8500h
+LXI D 8600h
+XRA A
+NEXT: LDAX D
+ADC M
+MOV M A
+INX H
+INX D
+DCR C
+JNZ NEXT
+MVI A 00h
+MOV M A
+HLT
+
+program 4:
+N decimal number addition
+
+MVI C 06h
+XRA A
+MOV B A
+LXI H 8050h
+LOOP: ADD M
+JNC NEXT
+INR B
+NEXT: INX H
+DCR C
+JNZ LOOP
+STA 8070h
+MOV A B
+STA 8071h
+HLT
+
+
+program 5:
+multiplication of two digit BCD
+
+MVI C 08h
+MVI D 04h
+XRA A
+MOV B A
+LOOP: ADD C
+DAA
+JNC NEXT
+INR B
+NEXT: DCR D
+JNZ LOOP
+STA 8600h
+MOV A B
+STA 8601h
+HLT
+
+program 6:
+addition of two 16-bit number
+
+MVI C 00h
+LHLD 8500h
+XCHG
+LHLD 8502h
+DAD D
+JNC LOOP
+INR C
+LOOP: SHLD 8504h
+MOV A C
+STA 8506h
+HLT
+
+program 7:
+4-digit BCD addition
+
+MVI C 00h
+LHLD 8500h
+XCHG
+LHLD 8502h
+MOV A E
+ADD L
+DAA
+JNC LOOP1
+INR D
+LOOP1: STA 8600h
+MOV A D
+ADD H
+DAA
+JNC LOOP2
+INR C
+LOOP2: STA 8601h
+MOV A C
+STA 8602h
+HLT
+
+program 8:
+subtraction of two 16-bit number
+
+MVI C 00h
+LHLD 8500h
+XCHG
+LHLD 8502h
+MOV A E
+SUB L
+JNC LOOP1
+DCR D
+LOOP1: STA 8600h
+MOV A D
+SUB H
+JNC LOOP2
+INR C
+LOOP2: STA 8601h
+MOV A C
+STA 8602h
+HLT
+
+program 9:
+block transfer
+
+LXI H 8500h
+LXI D 8600h
+MVI B 0Ah
+NEXT: MOV A M
+STAX D
+INX H
+INX D
+DCR B
+JNZ NEXT
+HLT
+
+program 10:
+sorting of array in ascending order
+
+MVI D 05h
+LOOP3: LXI H 8500h
+MVI C 05h
+LOOP2: MOV A M
+INX H
+CMP M
+JC LOOP1
+MOV B M
+MOV M A
+DCX H
+MOV M B
+INX H
+LOOP1: DCR C
+JNZ LOOP2
+DCR D
+JNZ LOOP3
+HLT
+
+
+program 11:
+1's complement of 8 bit numbers
+
+LDA 8500h
+CMA
+STA 8501h
+HLT
+
+
+program 12:
+1's complement of 16-bit numbers
+
+LXI H 8500h
+MOV A M
+CMA
+STA 8502h
+INX H
+MOV A M
+CMA
+STA 8503h
+HLT
+
+
+program 13:
+2's complement of 8-bit numbers
+
+MVI C 00h
+LDA 8500h
+CMA
+ADI 01h
+JNC LOOP
+INR C
+LOOP: STA 8501h
+MOV A C
+STA 8502h
+HLT
+
+program 14:
+fibonacci series
+
+MVI C 0Ah
+LXI H 8500h
+MOV A M
+INX H
+MOV D M
+LOOP: ADD D
+DAA
+INX H
+MOV M A
+MOV A D
+MOV D M
+DCR C
+JNZ LOOP
+HLT
+
+program 15:
+convert two packed BCD to two unpacked BCD
+
+LDA 8500h
+MOV B A
+ANI 0Fh
+STA 8600h
+MOV A B
+ANI F0h
+RRC
+RRC
+RRC
+RRC
+STA 8601h
+HLT
+
+program 16:
+convert to digit unpacked BCD to two unpacked BCD
+
+LDA 8500h
+MOV B A
+LDA 8501h
+RLC
+RLC
+RLC
+RLC
+ADD B
+STA 8600h
+HLT
+
+program 17:
+largest of two numbers
+
+LXI H 8500h
+MOV A M
+INX H
+CMP M
+JNC NEXT
+MOV A M
+NEXT: STA 8600h
+HLT
+
+program 18:
+smallest of 'N' byte numbers
+
+MVI C 0Ah
+LXI H 8500h
+MOV A M
+DCR C
+LOOP: INX H
+CMP M
+JC NEXT
+MOV A M
+NEXT: DCR C
+JNZ LOOP
+STA 8600h
+HLT
+
+
+
+program 19:
+convert ASCII to hex
+
+LDA 8500h
+SBI 30h
+CPI 0Ah
+JC LOOP
+SBI 07h
+LOOP: STA 8501h
+HLT
+
+
+program 20:
+program to convert to binary
+
+LXI H 8500h
+MVI C 00h
+MOV B M
+XRA A
+UP: ADI 01h
+DAA
+JNZ LOOP
+INR C
+LOOP: DCR B
+JNZ UP
+STA 8501h
+MOV A C
+STA 8502h
+HLT
+
