@@ -1,0 +1,363 @@
+CREATE TABLE client_master
+(client_no varchar(6) primary key check(Client_no LIKE 'c%'),
+name varchar(25),
+address1 varchar(30),
+address2 varchar(30),
+city varchar(11),
+state varchar(11),
+pincode number(6),
+bal_due number(10,2));
+
+
+CREATE TABLE product_master
+(product_no varchar(6) primary key check(Product_no LIKE 'P%'),
+description varchar(11) not null,
+profit_percentage number(1,2) not null,
+unit_measure varchar(10) not null,
+qty_on_hand number(8) not null,
+reorder_level number(8) not null,
+sell_price number(8,2) not null check(sell_price !=0),
+cost_price number(8,3) not null check(cost_price !=0));
+
+
+CREATE TABLE salesman_master
+(salesman_no varchar(6) primary key check(salesman_no LIKE 's%'),
+salesman_name varchar(20) not null,
+address1 varchar(30) not null,
+address2 varchar(30),
+city varchar(20),
+pincode varchar(6),
+state varchar(20),
+sal_amt number(8,2) not null check(sal_amt !=0),
+tgt_to_get number(8,2) not null check(tgt_to_get !=0),
+ytd_sales number(8,2) not null,
+remark varchar(60));
+
+
+CREATE Table sales_order(
+s_order_no varchar(6) primary key check(s_order_no LIKE 'o%'),
+s_order_date date,
+client_no varchar(6) references client_master(client_no),
+dely_addr varchar(21),
+salesman_no varchar(6) references salesman_master(salesman_no),
+dely_type char(1) default 'F',
+billed_yn char(1),
+dely_date date
+check(dely_date > s_order_date),
+order_status varchar(10)
+check(order_status IN('inprocess','fulfilled','backorder','cancelled')));
+
+
+CREATE TABLE sales_order_details
+(s_order_no REFERENCES sales_order(s_order_no),
+product_no REFERENCES product_master(product_no),
+qty_ordered number(8),
+qty_disp number(8),
+product_rate number(10,2),
+PRIMARY KEY(s_order_no,product_no));
+
+CREATE TABLE challan_header
+(challan_no varchar(6) primary key check(Challan_no LIKE 'ch%'),
+s_order_no REFERENCES sales_order(s_order_no),
+challan_date date not null,
+billed_YN char(1) Default 'N');
+
+
+insert into client_master values('c00001','ivanbayross','','','bombay','maharastra',400014,11000);
+insert into client_master values('c00002','vandanasaitwal','','','tamilnadu','maharastra',780014,0);
+insert into client_master values('c00003','pramadajaguste','','','bombay','maharastra',400017,1000);
+insert into client_master values('c00004','basunavindgi','','','bombay','maharastra',400016,0);
+insert into client_master values('c00005','ravisreedharan','','','delhi','maharastra',100001,2000);
+insert into client_master values('c00006','rukmini','','','bombay','maharastra',400011,0);
+
+
+insert into product_master values('p00001','1.44 floppies',1,'piece',100,20,121,100);
+insert into product_master values('p03413','mouse',6,'piece',10,3,12000,11280);
+insert into product_master values('p06734','monitor',1,'piece',20,1,1010,1000);
+insert into product_master values('p07861','1.22 floppies',1,'piece',100,20,121,100);
+insert into product_master values('p07868','keyboard',2,'piece',10,3,3110,3010);
+insert into product_master values('p07881','cd drive',2,'piece',10,3,1210,1100);
+insert into product_master values('p07961','540 hdd',4,'piece',10,3,8400,800);
+insert into product_master values('p07971','1.44 drive',1,'piece',10,3,1010,1000);
+insert into product_master values('p08861','1.22 drive',1,'piece',2,3,1010,1000);
+
+insert into salesman_master values('s00001','kiran','A-14','worli','bombay',400002,'mah',3000,100,10,'good');
+insert into salesman_master values('s00002','manish','6','nariman','bombay',400001,'mah',3000,200,1200,'good');
+insert into salesman_master values('s00003','ravi','P-7','bandra','bombay',400032,'mah',3000,200,100,'good');
+insert into salesman_master values('s00004','ashish','A-J','juhu','bombay',400044,'mah',3000,200,100,'good');
+
+insert into sales_order values('o19001','12-jan-96','c00001',' ','s00001','f','n','20-jan-96','inprocess');
+insert into sales_order values('o19002','21-jan-96','c00002',' ','s00002','p','n','27-jan-96','cancelled');
+insert into sales_order values('o46861','18-feb-96','c00003',' ','s00003','f','y','20-feb-96','fulfilled');
+insert into sales_order values('o19003','03-feb-96','c00001',' ','s00001','f','y','07-apr-96','fulfilled');
+insert into sales_order values('o46866','20-may-96','c00004',' ','s00002','p','n','22-may-96','cancelled');
+insert into sales_order values('o10008','24-may-96','c00005',' ','s00004','f','n','26-may-96','inprocess');
+
+insert into sales_order_details values('o19001','p00001',4,4,120);
+insert into sales_order_details values('o19001','p07961',2,1,8400);
+insert into sales_order_details values('o19001','p07881',2,1,1210);
+insert into sales_order_details values('o19002','p00001',10,0,121);
+insert into sales_order_details values('o46861','p07868',3,3,3110);
+insert into sales_order_details values('o46861','p00001',3,1,1210);
+insert into sales_order_details values('o46866','p07868',10,10,1210);
+insert into sales_order_details values('o46861','p03413',4,4,1010);
+insert into sales_order_details values('o19003','p03413',2,2,1010);
+insert into sales_order_details values('o19003','p06734',1,1,12000);
+insert into sales_order_details values('o46866','p07961',1,0,840);
+insert into sales_order_details values('o46866','p07971',1,0,1010);
+insert into sales_order_details values('o10008','p00001',10,1,121);
+insert into sales_order_details values('o10008','p07971',1,3,1010);
+
+insert into challan_header values('ch9001','o19001','12-dec-91','y');
+insert into challan_header values('ch6861','o46861','12-nov-91','y');
+insert into challan_header values('ch3961','o10008','12-oct-91','y');
+
+--LISTING III
+--3.1
+SELECT name FROM client_master;
+--3.2
+SELECT * FROM client_master;
+--3.3
+SELECT name,city FROM client_master;
+--3.4
+SELECT description FROM product_master;
+--3.5
+SELECT name FROM client_master WHERE name LIKE '_a%';
+--3.6
+SELECT city FROM client_master WHERE name LIKE '_a%';
+--3.7
+SELECT name,city FROM client_master WHERE city IN ('bombay','delhi','madras');
+--3.8
+SELECT * FROM client_master WHERE city='bombay';
+--3.9
+SELECT client_no, name,bal_due FROM client_master WHERE bal_due>10000;
+--3.10
+SELECT * FROM sales_order WHERE s_order_date LIKE '%JAN%';
+--3.11
+SELECT * FROM sales_order WHERE client_no='c00001' OR client_no='c00002';
+--3.12
+SELECT product_no, description FROM product_master WHERE description='1.44 Drive' OR description='1.22 Drive';
+--SELECT product_no, description FROM product_master WHERE description='1.44 Drive' OR '1.22 Drive';
+--3.13
+SELECT description,sell_price, (sell_price*15)as new FROM product_master WHERE sell_price>1500;
+--3.14
+SELECT description,sell_price, (sell_price*15)as new_price FROM product_master WHERE sell_price>1500;
+--3.15
+SELECT description,sell_price FROM product_master WHERE sell_price<1500;
+--3.16
+SELECT description FROM product_master order by description asc;
+--3.17
+SELECT description,sqrt(cost_price)as sqrt_costprice FROM product_master;
+--3.18
+SELECT cost_price/(sell_price-100) as divide_price FROM product_master WHERE description='540 hdd';
+--3.18
+SELECT name, city, state FROM client_master WHERE state!='maharashtra';
+--3.19
+SELECT product_no,description, sell_price FROM product_master WHERE description LIKE 'm%';
+--3.20
+SELECT s_order_no FROM sales_order WHERE dely_date LIKE '%MAR%' and order_status = 'cancelled';
+--3.21
+
+
+--LISTING VI
+--4.1
+update sales_order set s_order_date='19-JAN-96' where client_no='C00001';
+--4.2
+update product_master set sell_price =1150 where description='1.44 Drive';
+--4.3
+delete from sales_order_details where s_order_no='O19001';
+delete from challan_header where s_order_no='O19001';
+delete from sales_order where s_order_no='O19001';
+--4.4
+delete from sales_order where dely_date <'10-jan-96';
+--4.5
+update client_master set city='Bombay' where client_no='C00006';
+--4.6
+update sales_order set dely_date='16-AUG-96' where s_order_no='O10008';
+--4.7
+update client_master set bal_due=1000 where client_no='C00001';
+--4.8
+update product_master set costa_price=950 where descirption='1.22 drive';
+
+
+
+--LISTING V
+--5.1
+select count(s_order_no) from Sales_order;
+--5.2
+select avg(cost_price) from product_master;
+--5.3
+select min(cost_price) from product_master;
+--5.4
+select min(cost_price) as min_price, max(cost_price) as max_price from product_master;
+--5.5
+select count(Product_no) from product_master where cost_price>=1500;
+--5.6
+select *from product_master where qty_on_hand < reorder_lvl;
+--5.7
+select client_master.name, (sales_order.s_order_no),sales_order.s_order_date from client_master,sales_order;
+
+
+
+----LISTING VI
+--6.1
+select d.product_no,p.description from product_master p,client_master c, sales_order s,sales_order_details d where p.product_no=d.product_no and c.client_no=s.client_no and s.s_order_no=d.s_order_no and c.name='ivanbayross';
+--6.2
+select d.product_no,p.description,sum(d.qty_ordered) from sales_order_details d,sales_order s,product_master p where p.product_no=d.product_no and s.s_order_no=d.s_order_no and to_char(dely_date,'mon-yy')= to_char(sysdate,'mon-yy') group by d.product_no,p.description;
+--6.3
+select distinct p.product_no,p.description from product_master p,sales_order_details d where p.product_no=d.product_no;
+--6.4
+select c.name,s.client_no from client_master c,product_master p, sales_order s,sales_order_details d where c.client_no=s.client_no and p.product_no=d.product_no and s.s_order_no=d.s_order_no and p.description='cd drive';
+--6.5
+select d.product_no,d.s_order_no from sales_order_details d, sales_order s,product_master p where s.s_order_no=d.s_order_no and p.product_no=d.product_no and d.qty_ordered<15 and p.description='1.44 floppies';
+--6.6
+select d.product_no,p.description,sum(qty_ordered)"Qty Ordered" from sales_order_details d,sales_order s,product_master p,client_master c where s.s_order_no=d.s_order_no and p.product_no=d.product_no and c.client_no=s.client_no and (c.name='ivanbayross' or c.name='vandanasaitwal') group by d.product_no,p.description;
+--6.7
+select s.client_no,d.product_no,p.description ,sum(qty_ordered)"Qty_ordered" from sales_order s,sales_order_details d,product_master p,client_master c where s.s_order_no=d.s_order_no and d.product_no=p.product_no and s.client_no=c.client_no group by s.client_no,d.product_no,p.description having s.client_no='c00001' or s.client_no='c00002';
+
+
+--LISTING VII
+--7.1
+select product_no,description from product_master where product_no not in(select product_no from sales_order_details);
+--7.2
+select name,address1,address2,city,pincode from client_master where client_no in (select client_no from sales_order where s_order_no='o19002');
+--7.3
+select client_no,name from client_master where client_no in(select client_no from sales_order where to_char(s_order_date,'mon,yy')<'may,96');
+--7.4
+select client_no,name from client_master where client_no in (select client_no from sales_order where s_order_no in (select s_order_no from sales_order_details where product_no in(select product_no from product_master where description='1.44 drive')));
+--7.5
+select name from client_master where client_no in(select client_no from sales_order where s_order_no in (select s_order_no from sales_order_details where (qty_ordered*product_rate)>=10000));
+
+
+--LISTING VII
+--8.1)inventory
+create table inventory (pno number, pname varchar (20), rate number) ;
+declare
+ratel inventory.rate%type;
+begin
+insert into inventory values (1,'al', 100);
+insert into inventory values (2, 'b', 200) ;
+insert into inventory values (3,'c',300) ;
+update inventory set rate=rate+(rate*0.2) ;
+commit;
+end;
+/
+select * from inventory;
+
+alter table inventory add (no_of_items number) ;
+update inventory set no_of_items =10 where pno=1;
+update inventory set no_of_items=35 where pno=2;
+update inventory set no_of_items =05 where pno=3;
+select * from inventory;
+
+create table inventory(pro_no varchar(6) check(pro_no like 'P%'),pro_name varchar(25),rate number);
+begin
+insert into inventory values ('P001','al', 100);
+insert into inventory values ('P002', 'b', 200) ;
+insert into inventory values ('P003','c',300) ;
+end;
+/
+declare
+v_rate inventory.rate%type;
+begin
+update inventory
+set rate=rate+(rate*0.2);
+commit;
+end;
+/
+select * from inventory;
+alter table inventory add(No_of_item number);
+update inventory set no_of_ITEM=10 where pro_no='P00001';
+update inventory set no_of_ITEM=5 where pro_no='P00002';
+update inventory set no_of_ITEM=9 where pro_no='P00003';
+commit;
+select * from inventory;
+
+
+--8.2
+create table student1 (SRN varchar (10) ,S_name varchar(20) , marks number, div varchar (5)) ;
+desc student1;
+
+Begin
+insert into student1 (srn,s_name, marks, div) values (1,'A',80,'pass');
+commit;
+insert into student1 (srn, s_name, marks, div) values (2,'b',20,'fail');
+commit;
+insert into student1 (srn, s_name, marks, div) values (3,'C',70,'pass');
+commit;
+insert into student1 (srn, S_name, marks, div) values (4,'d',40,'fail');
+commit;
+End;
+/
+
+select * from student1;
+
+DECLARE
+v_srn student1.srn%Type;
+v_s_name student1.s_name%Type;
+v_marks student1.marks%Type;
+v_div student1.div%Type;
+CURSOR Student_Passcur IS Select * From student1 Where div='pass';
+CURSOR Student_Failcur IS Select * From student1 Where div='fail';
+
+BEGIN
+
+If NOT Student_Passcur%ISOPEN THEN
+OPEN Student_Passcur;
+END IF;
+DBMS_OUTPUT.PUT_LINE('Passed Students');
+LOOP
+FETCH Student_Passcur INTO v_srn, v_s_name, v_marks, v_div;
+Exit When Student_Passcur%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE(v_srn||' '||v_s_name||' '||v_marks||' '||v_div);
+END LOOP;
+CLOSE Student_Passcur;
+
+IF NOT Student_Failcur%ISOPEN THEN 
+OPEN Student_Failcur;
+END IF;
+DBMS_OUTPUT.PUT_LINE('Failed Students');
+LOOP
+FETCH Student_Failcur INTO v_srn, v_s_name, v_marks, v_div;
+Exit When NOT Student_Failcur%FOUND;
+DBMS_OUTPUT.PUT_LINE(v_srn||' '||v_s_name||' '||v_marks||' '||v_div);
+END LOOP;
+END;
+/
+
+
+--listing XI
+--9.1
+create table emp (empno number, emp_name varchar (20), comm number) ;
+begin
+insert into emp values (1,'al', 100);
+insert into emp values (2, 'b', 200) ;
+insert into emp values (3,'c',300) ;
+commit;
+end;
+/
+
+
+DECLARE
+invalid_commission EXCEPTION;
+no_commission EXCEPTION;
+v_comm emp.Comm%TYPE;
+BEGIN
+SELECT comm INTO v_comm FROM emp
+WHERE empno=&emp_id;
+IF v_comm<0 THEN
+RAISE invalid_commission;
+ELSIF v_comm IS NULL THEN
+RAISE no_commission;
+ELSE
+DBMS_OUTPUT.PUT_LINE(TO_CHAR(v_comm));
+END IF;
+EXCEPTION
+WHEN invalid_commission THEN
+DBMS_OUTPUT.PUT_LINE('commission is negative.');
+WHEN no_commission THEN
+DBMS_OUTPUT.PUT_LINE('no commission');
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE('no such id');
+END;
+/
