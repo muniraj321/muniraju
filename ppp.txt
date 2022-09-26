@@ -1,0 +1,341 @@
+program 1:
+str=input("enter a string: ")
+start=1
+while(start==1):
+    print("select your chois: \n1. String slicing \n2.string function \n3.exit")
+    ch=int(input("select operations 1,2,3: "))
+    #String slicing
+
+    if ch==1:
+        print(str[0::])
+        print(str[::-1])
+        print(str[::2])
+        print(str[-3:])
+        print(str[2:-3])
+        print(str[-1])
+
+    #string functions
+
+    elif ch==2:
+        print("length of string: ",len(str))
+        print(str.startswith("all"))
+        print(str.endswith("folles"))
+        word=input("enter the word: ")
+        print(str.find(word))
+        print(str.rfind(word))
+        print(str.count(word))
+    #exit
+
+    elif ch==3:
+        break
+
+    else:
+        print("invalid choice")
+        break
+
+start=int(input("do you want to continue ?(0 or 1): ") )
+
+
+program 2:
+Str1=int(input("enter first number: "))
+Str2=int(input("enter second number: "))
+print("the sum of 2 number is: ",Str1 + Str2)
+
+
+program 3:
+import math
+import cmath
+a=int(input("enter value of a: "))
+b=int(input("enter value of b: "))
+c=int(input("enter value of c: "))
+d=(b**2)-(4*a*c)
+if(d<0):
+    sol1 = (-b + cmath.sqrt(d) / (2 * a))
+    sol2 = (-b - cmath.sqrt(d) / (2 * a))
+    print("the roots are ",sol1,"and ",sol2)
+
+elif(d>0):
+    sol1 = (-b + math.sqrt(d) / (2 * a))
+    sol2 = (-b - math.sqrt(d) / (2 * a))
+    print("the roots are",sol1,sol2)
+
+else:
+    sol1=-b/(2*a)
+    sol2=sol1
+    print("the roots ar",sol1,sol2)
+
+
+program 4:
+file = open("data.txt", 'x')
+
+file.write("hello!")
+file.close()
+
+file = open("data.txt", "r")
+print(file.read())
+file.close()
+
+file = open("data.txt", "r")
+data = file.read()
+print("Number of characters in a file: {}".format(len(data)))
+file.close()
+
+file = open("data.txt", "r")
+data = file.read()
+words = data.split()
+print("Number of words in a file: {}".format(len(words)))
+file.close()
+
+file = open("data.txt", "r")
+data = file.readlines()
+print("Number of lines in a file: {}".format(len(data)))
+file.close()
+
+print("\n After appending: ")
+file = open("data.txt", "a")
+data = file.writelines("\n python programming \n perl programming \n web programming ")
+file.close()
+
+file = open("data.txt", "r")
+print(file.read())
+file.close()
+
+file = open("data.txt", "r")
+data = file.read()
+print("Number of characters in a file: {}".format(len(data)))
+file.close()
+
+file = open("data.txt", "r")
+data = file.read()
+words = data.split()
+print("Number of words in a file: {}".format(len(words)))
+file.close()
+
+file = open("data.txt", "r")
+data = file.readlines()
+print("Number of lines in a file: {}".format(len(data)))
+file.close()
+
+
+program 5:
+a=int(input("enter first number: "))
+b=int(input("enter second number: "))
+if(a>b):
+    print(a,"is the largest")
+else:
+    print(b, "is the largest")
+
+program 6:
+a=int(input("enter first number: "))
+b=int(input("enter second number: "))
+c=int(input("enter third number: "))
+if(a>b):
+    if(a>c):
+        print(a,"is the largest")
+    else:
+        print(c,"is the largest")
+else:
+    if(b>c):
+        print(b,"is the largest")
+    else:
+        print(c, "is the largest")
+
+program 7:
+while True:
+    print("\nMenu Driven Program")
+    print("1.tuple")
+    print("2.list")
+    print("3.diSctionaty")    
+    print("4.Exit")
+    choice=input("Enter your choice:")
+    if(choice=="1"):
+           print("\n creation of tuples")
+           marx_tuples=1,2,3
+           print("marx_tuples: ",marx_tuples)
+           print("\nAccessing tuples elements")
+           tuple1=1,2,3
+           print("tuples: ",tuple1)
+           print("tuple1[0]: ",tuple1[0])
+           print("tuple1[-1]: ", tuple1[-1])
+           print("tuple1[2]: ", tuple1[2])
+           marx_tuples1=('groucho','chico','horpo')
+           print("mwrx_tuple: ",marx_tuples1)
+           a,b,c=marx_tuples1
+           print("a: ",a,"b: ",b,"c: ",c)
+           print("\n exchange values in one tiples")
+           password="swordfish"
+           icecream="tutu fruite"
+           password,icecream=icecream,password
+           print("password: ",password,"\n icecream: ",icecream)
+           print("\n conversion of list to tuple")
+           marx_list=['grouncho','chico','herpo']
+           tuple(marx_list)
+           print("type of marx_list",type(marx_list))
+    elif(choice=="2"):
+        print("creating a list")
+        weekdays=['monday','tuesday','wednesday']
+        print(weekdays)
+        small_birds=['humming birds','finch']
+        extinct_birds=['dodo','passenger','pigeon']
+        all_birds=[small_birds,extinct_birds,'marco']
+        print("small birds=",small_birds)
+        print("extinct birds=", extinct_birds)
+        print("all birds=", all_birds)
+        print("all birds[0]",all_birds[0])
+        print("all birds[0][0]", all_birds[0][0])
+        print("all birds[0][0][0]", all_birds[0][0][0])
+        print("\n adding item")
+        mones=['grouncho','chico','harpo']
+        others=['gummo','kare']
+        print("mones: ",mones)
+        print("others : ",others)
+        mones.append('zeppo')
+        print("mones.appends('zeppo): ",mones)
+        mones.append(others)
+        print("mones.append(others): ",mones)
+        mones1=['grouncho','chico','harpo']
+        others1=['gummo','karl']
+        print("\n combining lists")
+        mones1.extend(others1)
+        print("mones1.extends(others1): ",mones1)
+        mones1+=others1
+        print("mones1+=others1: ",mones1 )
+        a=[1,2,3]
+        b=a
+        a[0]="surprise"
+        print("\n a after swap: ",a)
+        print("\n b after swap: ",b)
+    
+    elif(choice=="3"):
+        print("creating a dictionary ")
+        Reg_value = { 1: "one", 2: "24-hours", 3.14:"pi value"}
+        print(Reg_value)
+        print("\n Adding and changing an item in dictionary")
+        weekdays={1:"sunday",2:"monday"}
+        weekdays[4]="thursday"
+        weekdays[4]="wednesday"
+        print(weekdays)
+        print("\n combining dictionary with update")
+        weekdays1={1:"sunday",2:"monday",3:"tuesday"}
+        holidays={7:"saturday",3:"thursday"}
+        weekdays1.update(holidays)
+        print("\n covert tuple list into a dictionary")
+        lot=[['a','b'],['c','d'],['e','f']]
+        print(dict(lot))
+        lot=[('a','b'),('c','d'),('e','f')]
+        print(dict(lot))
+        tos=('ab','cd','ef')
+        print(dict(tos))
+        print("\n deleting an elemnet in the dictionary")
+        weekdays2={1:"sunday",2:"monday",3:"tuesday"}
+        del weekdays2[1]
+        print(weekdays2)
+
+    elif choice=="4":
+        break
+    else:
+        print("Wrong Choice")
+
+program 8:
+while True:
+    print("\nMenu Driven Program")
+    print("1.perfect")
+    print("2.amstrang")
+    print("3.palindorme")    
+    print("4.Exit")
+    ch=int(input("Enter your choice:"))
+    if ch == 1:
+        num = int(input("Enter the number: "))
+        sum = 0
+        for x in range(1, num):
+            if num % x == 0:
+                sum += x
+        if sum == num:
+            print(f"{num} is a perfect number")
+        else:
+            print(f"{num} is not a perfect number")
+    elif ch==2:
+        num = int(input("Enter the number: "))
+        sum = rem = 0
+        temp = num
+        while temp != 0:
+            rem = temp % 10
+            sum += rem**3
+            temp //= 10
+        if sum == num:
+            print(f"{num} is an armstrong number")
+        else:
+            print(f"{num} is not an armstrong number")
+    
+    elif ch == 3:
+        num = int(input("Enter the number: "))
+        rev = rem = 0
+        temp = num
+        while temp != 0:
+            rem = temp % 10
+            rev = rev * 10 + rem
+            temp //= 10
+        if rev == num:
+            print(f"{num} is a palindrome")
+        else:
+            print(f"{num} is not a palindrome")
+    elif choice==4:
+        break
+    else:
+        print("Wrong Choice")
+
+
+
+program 9:
+import math
+from math import factorial
+while True:
+    print("\nfactorial")
+    print("1.factorial of a number")
+    print("2.factorial of number using function")
+    print("3.factorial of a number using recursion")    
+    print("4.Exit")
+    choice=input("Enter your choice:")
+    if(choice=='1'):
+        num=int(input("enter a number: "))
+        fact=1
+        if num>=1:
+            for i in range(1,num+1):
+                fact=fact*i
+            print("factorial of ",num,"is :",fact)
+    elif(choice=='2'):
+        def factorial(x):
+            if x==1:
+                return 1
+            else:
+                return (x*factorial(x-1))
+        num=int(input("enter the number: "))
+        result=factorial(num)
+        print("factorial of" ,num,"is : ",result)
+
+    elif(choice=='3'):
+        n=int(input("enter a number: "))
+        res=factorial(n)
+        print("factorial of ",n,"is: ",res)
+    elif(choice=='4'):
+        break
+    else:
+        print("invalid choice")
+
+
+program 10:
+class professional:
+    def __init__(self,n,o):
+        self.name=n
+        self.occupation=0
+    def do_work(self):
+        print(self.name,"is a/an ",self.occupation)
+    def speakes(self):
+        print(self.name,"says how are you? ")
+
+tom=professional("tom cruise","actor")
+tom.do_work()
+tom.speakes()
+steffi=professional("steffi graff","tennis player")
+steffi.do_work()
+steffi.speakes()
