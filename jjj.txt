@@ -328,5 +328,116 @@ javac classb.java
 java classb
 
 
+PRGM12#SINGLE INTERFACE
+import java.util.*;
+interface A
+{
+double pi=3.14;
+void area();
+void circum();
+}
+class Circle implements A
+{
+double r;
+void getdata()
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a value for r");
+r=sc.nextDouble();
+}
+public void area()
+{
+System.out.println("Area="+(pi*r*r));
+}
+public void circum()
+{
+System.out.println("circumference is"+(2*pi*r));
+}
+public static void main(String args[])
+{
+Circle C=new Circle();
+C.getdata();
+C.area();
+C.circum();
+}
+}
+
+
+PRGM12#MULTIPLE INTERFACE
+import java.util.*;
+interface A
+{
+double pi=3.14;
+void area();
+}
+interface B
+{
+void circum();
+}
+class Circle1 implements A,B
+{
+double r;
+void getdata()
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a value for r");
+r=sc.nextDouble();
+}
+public void area()
+{
+System.out.println("Area="+(pi*r*r));
+}
+public void circum()
+{
+System.out.println("circumference is"+(2*pi*r));
+}
+public static void main(String args[])
+{
+Circle1 C=new Circle1();
+C.getdata();
+C.area();
+C.circum();
+}
+}
+
+
+PRGM12#INHERITED INTERFACE
+import java.util.*;
+interface A
+{
+double pi=3.14;
+void area();
+}
+interface B extends A
+{
+void circum();
+}
+class Circle2 implements B
+{
+double r;
+void getdata()
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a value for r");
+r=sc.nextDouble();
+}
+public void area()
+{
+System.out.println("Area="+(pi*r*r));
+}
+public void circum()
+{
+System.out.println("circumference is"+(2*pi*r));
+}
+public static void main(String args[])
+{
+Circle2 C=new Circle2();
+C.getdata();
+C.area();
+C.circum();
+}
+}
+
+
 
 
