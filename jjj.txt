@@ -1,0 +1,662 @@
+program 1:
+import java.util.*;
+public class Biggest{
+public static void main(String[] args) {
+int n1,n2,n3,big;
+n1=Integer.parseInt(args[0]);
+n2=Integer.parseInt(args[1]);
+n3=Integer.parseInt(args[2]);
+if(n1>n2 && n1>n3)
+big=n1;
+else if(n2>n1 && n2>n3)
+big=n2;
+else
+big=n3;
+System.out.println("Biggest no" +big);
+}
+}
+
+
+
+program 2:
+import java.util.Scanner;
+class factorial {
+public static void main(String[] args) {
+int n,i,fact=1;
+Scanner scan=new Scanner(System.in);
+System.out.print("Enter the number: ");
+n=scan.nextInt();
+for(i=1;i<=n;i++)
+fact=fact*i;
+System.out.println("The factorial of " + n + " is: " + fact);
+}
+}
+
+
+program 3:
+import java.util.Scanner;
+public class SumofDigits {
+public static void main(String[] args) {
+Scanner scan=new Scanner(System.in);
+System.out.print("Enter the number: ");
+int n,rev,sum,temp,rem;
+n=scan.nextInt();
+temp=n;
+sum=0;
+rev=0;
+while(n>0)
+{
+	rem=n%10;
+	sum= sum+rem;
+	rev=rev*10+rem;
+	n=n/10;
+}
+System.out.println("The sum of " + temp + " is: " + sum);
+if(rev==temp)
+{
+	System.out.println(temp + " is a palindrome");
+}
+else
+{
+	System.out.println(temp + " is not a palindrome");
+}
+}
+}
+
+
+program 4:
+import java.util.Arrays;  
+import java.util.Scanner;
+public class Sort_Array  
+{  
+public static void main(String args[])   
+{  
+Scanner sc=new Scanner(System.in);
+Scanner sc1=new Scanner(System.in);
+int n;
+System.out.println("Enter the number of elements ");
+n=sc.nextInt();
+String str[]=new String[n]; 
+System.out.println("Enter the String ");
+for(int i=0; i<n ;i++) 
+{
+   str[i]=sc1.nextLine();
+}
+Arrays.sort(str);
+System.out.println(Arrays.toString(str));
+}  
+}
+
+
+program 5:
+import java.util.Scanner;
+class MatrixMultiplication{
+public static void main(String args[]){
+int m, n, p, q, sum = 0, c, d, k;     
+Scanner in = new Scanner(System.in);
+    System.out.println("Enter the number of rows and columns of first matrix");
+    m = in.nextInt();
+    n = in.nextInt();
+    int first[][] = new int[m][n];
+    System.out.println("Enter elements of first matrix");
+    for(c = 0; c < m; c++)
+    for(d = 0; d < n; d++)
+    first[c][d] = in.nextInt();
+       System.out.println("Enter the number of rows and columns of second matrix");
+       p = in.nextInt();
+       q = in.nextInt();
+if (n != p)
+System.out.println("The matrices can't be multiplied with each other.");
+else
+{
+      int second[][] = new int[p][q];
+      int multiply[][] = new int[m][q];
+      System.out.println("Enter elements of second matrix");
+      for (c = 0; c < p; c++)
+      for (d = 0; d < q; d++)
+      second[c][d] = in.nextInt();
+for (c = 0; c < m; c++)
+{
+for (d = 0; d < q; d++)
+{  
+for (k = 0; k < p; k++)
+{
+sum = sum + first[c][k]*second[k][d];
+}
+multiply[c][d] = sum;
+sum = 0;
+}
+}
+System.out.println("Product of the matrices:");
+for (c = 0; c < m; c++)
+{
+for (d = 0; d < q; d++)
+System.out.print(multiply[c][d]+"\t");
+System.out.print("\n");
+}
+}
+}
+}
+
+
+martix
+prgm 5:
+import java.util.*;
+
+public class multiply {
+	 public static void main(String[] args) {
+	 Scanner scan = new Scanner(System.in);
+	 // Taking the size of the matrices
+	 System.out.print("Enter the size of the first matrix (m x n): ");
+	 int m = scan.nextInt();
+	 int n = scan.nextInt();
+	 System.out.print("Enter the size of the second matrix (p x q): ");
+	 int p = scan.nextInt();
+	 int q = scan.nextInt();
+	 
+	 if (n != p) {
+	 System.out.println("Cannot perform matrix multiplication");
+	 } 
+	 else {
+	 int[][] mat_1 = new int[m][n];
+	 int[][] mat_2 = new int[p][q];
+	 // Taking elements of the two matrices
+	 
+	 System.out.println("Enter the elements of the first matrix");
+	 for (int i = 0; i < m; i++)
+	 for (int j = 0; j < n; j++)
+	 mat_1[i][j] = scan.nextInt();
+	 
+	 System.out.println("Enter the elements of the second matrix");
+	 for (int i = 0; i < p; i++)
+	 for (int j = 0; j < q; j++)
+	 mat_2[i][j] = scan.nextInt();
+	 
+	 // Performing the multiplication
+	 int mat_3[][] = new int[n][p];
+	 for (int i = 0; i < m; i++)
+	 for (int j = 0; j < q; j++)
+	 for (int k = 0; k < p; k++)
+	 mat_3[i][j] += mat_1[i][k] * mat_2[k][j];
+	 
+	 // Printing the product
+	 System.out.println("The product of the two matrices is: ");
+	  for (int i = 0; i < p; i++) {
+	  for (int j = 0; j < q; j++)
+	  System.out.print(mat_3[i][j] + "\t");
+	  System.out.println();
+	  }
+	 }
+	 }
+
+}
+
+
+
+program 6:
+import java.util.*;
+
+public class methodoverload {
+void add(int a, int b) {
+System.out.println("The sum of " + a + " and " + b + " : " + (a + b));
+}
+
+void add(String s1, String s2) {
+System.out.println("The sum of " + s1+ " and " + s2 + " : " + (s1 + s1));
+}
+
+public static void main(String[] args) {
+methodoverload obj = new methodoverload();
+o.add(23,12);
+a.add("reva","university");
+}
+}
+
+program 7:
+class Rectangle{
+int length;
+int width;
+void area(){
+System.out.println("area="+(length*width));
+}
+Rectangle()
+{
+length=width=10;
+}
+Rectangle(int a)
+{
+length=width=a;
+}
+Rectangle(int a,int b)
+{
+length=a;
+width=b;
+}
+}
+
+class Const_over{
+public static void main(String args[]){
+Rectangle r1=new Rectangle();
+Rectangle r2=new Rectangle(5);
+Rectangle r3=new Rectangle(20,10);
+System.out.println("");
+r1.area();
+r2.area();
+r3.area();
+}
+}
+
+program 8:
+class Car {
+  String name;
+  public void drive() {
+    System.out.println("Executing drive() from Car class: I can drive");
+  }
+}
+class Maruthi extends Car {
+  public void display() {
+    System.out.println("My name is " + name);
+  }
+}
+class Simple_Inheritance_Demo {
+  public static void main(String[] args) {
+    Maruthi Maruthi_Obj = new Maruthi();
+    Maruthi_Obj.name = "Maruthi ALTO";
+    Maruthi_Obj.display();
+    Maruthi_Obj.drive();
+
+  }
+}
+
+//8b
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class Parent_one {
+public void prints_parent()
+{
+System.out.println("REVA");
+}
+}
+
+class Parent_two extends Parent_one {
+public void print_for() 
+{ 
+System.out.println("University");
+}
+}
+
+class Child_class extends Parent_two {
+public void prints()
+{
+System.out.println("Bangalore");
+}
+}
+
+// Drived class
+public class multiinherite {
+	public static void main(String[] args)
+	{
+		Child_class g = new Child_class();
+		g.prints_parent(); 
+		g.print_for();
+		g.prints();
+	}
+}
+
+program 9:
+abstract class Bike{
+abstract void run();
+}
+class Honda4 extends Bike{
+void run(){
+System.out.println("implemented run method here");
+}
+public static void main(String args[]){
+Bike b=new Honda4();
+b.run();
+}
+}
+
+program 10:
+class A{
+void display()
+{
+System.out.println("this is a base class");
+}
+}
+class B extends A
+{
+void display()
+{
+super.display();
+System.out.println("This is a child class");
+}
+}
+class Method_Override{
+public static void main(String args[]){
+B b=new B();
+b.display();
+}
+}
+
+program 11:
+package Mypackage;
+public class classA
+{
+public void display()
+{
+System.out.println("Inside class A");
+}
+}
+
+import Mypackage.classA;
+class classB
+{
+public static void main(String args[]){
+classA obj=new classA();
+obj.display();
+}
+}
+
+javac -d . classA.java
+javac classb.java
+java classb
+
+
+PRGM12#SINGLE INTERFACE
+import java.util.*;
+interface A
+{
+double pi=3.14;
+void area();
+void circum();
+}
+class Circle implements A
+{
+double r;
+void getdata()
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a value for r");
+r=sc.nextDouble();
+}
+public void area()
+{
+System.out.println("Area="+(pi*r*r));
+}
+public void circum()
+{
+System.out.println("circumference is"+(2*pi*r));
+}
+public static void main(String args[])
+{
+Circle C=new Circle();
+C.getdata();
+C.area();
+C.circum();
+}
+}
+
+
+PRGM12#MULTIPLE INTERFACE
+import java.util.*;
+interface A
+{
+double pi=3.14;
+void area();
+}
+interface B
+{
+void circum();
+}
+class Circle1 implements A,B
+{
+double r;
+void getdata()
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a value for r");
+r=sc.nextDouble();
+}
+public void area()
+{
+System.out.println("Area="+(pi*r*r));
+}
+public void circum()
+{
+System.out.println("circumference is"+(2*pi*r));
+}
+public static void main(String args[])
+{
+Circle1 C=new Circle1();
+C.getdata();
+C.area();
+C.circum();
+}
+}
+
+
+PRGM12#INHERITED INTERFACE
+import java.util.*;
+interface A
+{
+double pi=3.14;
+void area();
+}
+interface B extends A
+{
+void circum();
+}
+class Circle2 implements B
+{
+double r;
+void getdata()
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a value for r");
+r=sc.nextDouble();
+}
+public void area()
+{
+System.out.println("Area="+(pi*r*r));
+}
+public void circum()
+{
+System.out.println("circumference is"+(2*pi*r));
+}
+public static void main(String args[])
+{
+Circle2 C=new Circle2();
+C.getdata();
+C.area();
+C.circum();
+}
+}
+
+
+program 13:
+class Vehicle
+{
+int maxspeed=120;
+double mil_s=23.26;
+double mil_e=24.12;
+final String eng="1997 cc";
+}
+
+class Car extends Vehicle
+{
+int maxspeed=180;
+void display()
+{
+System.out.println("maximum speed:"+super.maxspeed+"kmph");
+System.out.println("milege:"+mil_s+"kmpl to" +mil_e+"kmph");
+System.out.println("engine:"+eng);
+}
+final void address()
+{
+System.out.println("adddition specification:");
+System.out.println("model name: maruti swift dzire");
+System.out.println("stearing type  power stearing");
+System.out.println("maximum speed:fuel tank capacity:37 ltrs");
+}
+}
+
+public class Program13
+{
+private static String str="maruti swift engine";
+public void disp()
+{
+System.out.println("car name :"+str);
+System.out.println("specifications");
+}
+public static void main(String args[])
+{
+Program13 c1=new Program13();
+c1.disp();
+Car c2=new Car();
+c2.display();
+c2.address();
+}
+}
+
+
+program 14:A
+class Exception
+{
+public static void main(String args[])
+{
+try
+{
+int data=100/0;
+}
+catch(ArithmeticException e)
+{
+System.out.println(e);
+}
+System.out.println("rest of the code...");
+}
+}
+
+
+program 14:B
+class Exception
+{
+public static void main(String args[])
+{
+try
+{
+System.out.println("open files");
+int n=args.length;
+System.out.println("n="+n);
+int a=45/n;
+System.out.println("a="+a);
+int b[]={10,19,12,13};
+b[50]=100;
+}
+catch(ArithmeticException ae)
+{
+System.out.println("please type data while executing program");
+}
+catch(ArrayIndexOutOfBoundsException aie)
+{
+System.out.println("aie");
+System.out.println("please see that array is not in the range");
+}
+finally
+{
+System.out.println("close files");
+}
+}
+}
+
+program 15:
+class Producer implements Runnable
+{
+StringBuffer sb;
+Producer()
+{
+sb=new StringBuffer();
+}
+public void run()
+{
+synchronized(sb)
+{
+for(int i=0;i<5;i++)
+{
+try
+{
+sb.append(i+" ");
+Thread.sleep(500);
+System.out.println(i+"Append");
+}
+catch(InterruptedException ie)
+{
+}
+}sb.notify();
+}
+}
+}
+class Consumer implements Runnable
+{
+Producer prod;
+Consumer (Producer prod)
+{
+this.prod=prod;
+}
+public void run()
+{
+synchronized(prod.sb)
+{
+System.out.println(prod.sb);
+}
+}
+}
+class Communicate
+{
+public static void main(String args[])
+{
+Producer obj1=new Producer();
+Consumer obj2=new Consumer(obj1);
+Thread t1=new Thread(obj1);
+Thread t2=new Thread(obj2);
+t2.start();
+t1.start();
+}
+}
+
+
+program 16:
+class S1 extends Thread
+{
+S1()
+{
+System.out.println("Starting Thread1");
+}
+public void run()
+{
+System.out.println("Task one");
+}
+}
+class S2 extends Thread
+{
+S2()
+{
+System.out.println("starting Thread2");
+}
+public void run()
+{
+System.out.println("task 2");
+}
+}
+class MultiThread
+{
+public static void main(String args[])
+{
+S1 t1=new S1();
+S2 t2=new S2();
+t1.start();
+t2.start();
+}
+}

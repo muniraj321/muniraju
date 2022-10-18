@@ -1,0 +1,340 @@
+program 1:
+str=input("enter a string: ")
+start=1
+while(start==1):
+    print("select your chois: \n1. String slicing \n2.string function \n3.exit")
+    ch=int(input("select operations 1,2,3: "))
+    #String slicing
+
+    if ch==1:
+        print(str[0::])
+        print(str[::-1])
+        print(str[::2])
+        print(str[-3:])
+        print(str[2:-3])
+        print(str[-1])
+
+    #string functions
+
+    elif ch==2:
+        print("length of string: ",len(str))
+        print(str.startswith("all"))
+        print(str.endswith("folles"))
+        word=input("enter the word: ")
+        print(str.find(word))
+        print(str.rfind(word))
+        print(str.count(word))
+    #exit
+
+    elif ch==3:
+        break
+
+    else:
+        print("invalid choice")
+        break
+
+start=int(input("do you want to continue ?(0 or 1): ") )
+
+
+program 2:
+Str1=int(input("enter first number: "))
+Str2=int(input("enter second number: "))
+print("the sum of 2 number is: ",Str1 + Str2)
+
+
+program 3:
+import math
+import cmath
+a=int(input("enter value of a: "))
+b=int(input("enter value of b: "))
+c=int(input("enter value of c: "))
+d=(b**2)-(4*a*c)
+if(d<0):
+    printf("roots are imaginary")
+    sol1 = (-b + cmath.sqrt(d) / (2 * a))
+    sol2 = (-b - cmath.sqrt(d) / (2 * a))
+    print("the roots are ",sol1,"and",sol2)
+
+elif(d>0):
+    printf("roots are real and equal")
+    sol1 = (-b + math.sqrt(d) / (2 * a))
+    sol2 = (-b - math.sqrt(d) / (2 * a))
+    print("the roots are",sol1,sol2)
+
+else:
+    printf("roots are equal")
+    sol1=-b/(2*a)
+    sol2=sol1
+    print("the roots are",sol1,sol2)
+
+
+program 4:
+file = open("data.txt", 'x')
+
+file.write("hello!")
+file.close()
+
+file = open("data.txt", "r")
+print(file.read())
+file.close()
+
+file = open("data.txt", "r")
+data = file.read()
+print("Number of characters in a file: {}".format(len(data)))
+file.close()
+
+file = open("data.txt", "r")
+data = file.read()
+words = data.split()
+print("Number of words in a file: {}".format(len(words)))
+file.close()
+
+file = open("data.txt", "r")
+data = file.readlines()
+print("Number of lines in a file: {}".format(len(data)))
+file.close()
+
+print("\n After appending: ")
+file = open("data.txt", "a")
+data = file.writelines("\n python programming \n perl programming \n web programming ")
+file.close()
+
+file = open("data.txt", "r")
+print(file.read())
+file.close()
+
+file = open("data.txt", "r")
+data = file.read()
+print("Number of characters in a file: {}".format(len(data)))
+file.close()
+
+file = open("data.txt", "r")
+data = file.read()
+words = data.split()
+print("Number of words in a file: {}".format(len(words)))
+file.close()
+
+file = open("data.txt", "r")
+data = file.readlines()
+print("Number of lines in a file: {}".format(len(data)))
+file.close()
+
+
+program 5:
+a=int(input("enter first number: "))
+b=int(input("enter second number: "))
+if(a>b):
+    print(a,"is the largest")
+else:
+    print(b, "is the largest")
+
+program 6:
+a=int(input("enter first number: "))
+b=int(input("enter second number: "))
+c=int(input("enter third number: "))
+if(a>b):
+    if(a>c):
+        print(a,"is the largest")
+    else:
+        print(c,"is the largest")
+else:
+    if(b>c):
+        print(b,"is the largest")
+    else:
+        print(c, "is the largest")
+
+program 7:
+L = ["apple", "mango", "pineapple", "kiwi"]
+L.insert(2, "pine")
+L.append("guava")
+L.extend("banana")
+L.remove("apple")
+print(L)
+
+T = ("carrot", "potato", "tomato", "broccoli", "onion")
+print(T[1])
+print(T[1:4])
+print(len(T))
+
+print(T * 4)
+d = {"year": 2002, "brand": ["Ford", "tesla"]}
+print(d["brand"][1])
+print(d.keys())
+print(d.values())
+print(d.items())
+print(d.get("brand"))
+
+
+
+program 8:
+while True:
+    print("\nMenu Driven Program")
+    print("1.perfect")
+    print("2.amstrang")
+    print("3.palindorme")    
+    print("4.Exit")
+    ch=int(input("Enter your choice:"))
+    if ch == 1:
+        num = int(input("Enter the number: "))
+        sum = 0
+        for x in range(1, num):
+            if num % x == 0:
+                sum += x
+        if sum == num:
+            print(f"{num} is a perfect number")
+        else:
+            print(f"{num} is not a perfect number")
+    elif ch==2:
+        num = int(input("Enter the number: "))
+        sum = rem = 0
+        temp = num
+        while temp != 0:
+            rem = temp % 10
+            sum += rem**3
+            temp //= 10
+        if sum == num:
+            print(f"{num} is an armstrong number")
+        else:
+            print(f"{num} is not an armstrong number")
+    
+    elif ch == 3:
+        num = int(input("Enter the number: "))
+        rev = rem = 0
+        temp = num
+        while temp != 0:
+            rem = temp % 10
+            rev = rev * 10 + rem
+            temp //= 10
+        if rev == num:
+            print(f"{num} is a palindrome")
+        else:
+            print(f"{num} is not a palindrome")
+    elif choice==4:
+        break
+    else:
+        print("Wrong Choice")
+
+
+
+program 9:
+import math
+from math import factorial
+while True:
+    print("\nfactorial")
+    print("1.factorial of a number")
+    print("2.factorial of number using function")
+    print("3.factorial of a number using recursion")    
+    print("4.Exit")
+    choice=input("Enter your choice:")
+    if(choice=='1'):
+        num=int(input("enter a number: "))
+        fact=1
+        if num>=1:
+            for i in range(1,num+1):
+                fact=fact*i
+            print("factorial of ",num,"is :",fact)
+    elif(choice=='2'):
+        def factorial(x):
+            if x==1:
+                return 1
+            else:
+                return (x*factorial(x-1))
+        num=int(input("enter the number: "))
+        result=factorial(num)
+        print("factorial of" ,num,"is : ",result)
+
+    elif(choice=='3'):
+        n=int(input("enter a number: "))
+        res=factorial(n)
+        print("factorial of ",n,"is: ",res)
+    elif(choice=='4'):
+        break
+    else:
+        print("invalid choice")
+
+
+program 10:
+class professional:
+    def __init__(self,n,o):
+        self.name=n
+        self.occupation=0
+    def do_work(self):
+        print(self.name,"is a/an ",self.occupation)
+    def speakes(self):
+        print(self.name,"says how are you? ")
+
+tom=professional("tom cruise","actor")
+tom.do_work()
+tom.speakes()
+steffi=professional("steffi graff","tennis player")
+steffi.do_work()
+steffi.speakes()
+
+
+program 11:
+from tkinter import *
+root = Tk()
+root.title("Student Information")
+root.geometry("500x500")
+
+Label(root, text="UserName").place(x=10, y=10)
+Label(root, text="SRN").place(x=10, y=40)
+Label(root, text="E-Mail").place(x=10, y=70)
+Label(root, text="Phone Number").place(x=10, y=100)
+Label(root, text="Gender").place(x=10, y=130)
+Label(root, text="Language").place(x=10, y=180)
+ 
+e1 = Entry(root)
+e1.place(x=140, y=10)
+e2 = Entry(root)
+e2.place(x=140, y=40)
+e3 = Entry(root)
+e3.place(x=140, y=70)
+e4 = Entry(root)
+e4.place(x=140, y=100)
+radio = IntVar()  
+  
+Radiobutton(root, text="male", value=1).place(x=130, y=130)
+Radiobutton(root, text="Female",value=2).place(x=130, y=160)
+
+Checkbutton(root, text = "Kannada", ).place(x=130, y=190)
+Checkbutton(root, text = "English", ).place(x=130, y=210)
+Checkbutton(root, text = "Tamil", ).place(x=130, y=230)
+Checkbutton(root, text = "Telugu", ).place(x=130, y=230)
+ 
+Button(root, text="Save", height = 1, width = 6).place(x=140, y=280)
+Button(root, text="Clear", height = 1, width = 6).place(x=220, y=280)
+ 
+root.mainloop()
+
+
+program 13:
+from tkinter import *
+from tkinter import messagebox
+def ok():
+    uname = e1.get()
+    password = e2.get()
+    if(uname == ""):
+        messagebox.showinfo("", "Please enter user name")
+    elif(password == "") :        messagebox.showinfo("", "Please enter password")
+    elif(uname == "" and password == "") :
+        messagebox.showinfo("", "Please enter user name and password") 
+    elif(uname == "Admin" and password == "123"): 
+        messagebox.showinfo("","Login Success")
+        root.destroy() 
+    else :
+        messagebox.showinfo("","Sorry!!Incorrent Username and Password")
+root = Tk() #Creates an instance of root window or frame on which all other components can be housed
+root.title("Login")
+root.geometry("300x200")
+global e1
+global e2 
+Label(root, text="UserName").place(x=10, y=10)
+Label(root, text="Password").place(x=10, y=40)
+e1 = Entry(root)
+e1.place(x=140, y=10)
+e2 = Entry(root)
+e2.place(x=140, y=40)
+e2.config(show="*")
+Button(root, text="Login", command=ok ,height = 1, width = 6).place(x=10, y=100)
+root.mainloop()
