@@ -1,0 +1,117 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_vm2_name": {
+            "defaultValue": "vm2",
+            "type": "String"
+        },
+        "disks_vm2_disk1_d269507339044f6c8edd70b41106d97c_externalid": {
+            "defaultValue": "/subscriptions/936578c0-028f-4038-a9ec-8546f4dc8897/resourceGroups/muni/providers/Microsoft.Compute/disks/vm2_disk1_d269507339044f6c8edd70b41106d97c",
+            "type": "String"
+        },
+        "disks_vm2_disk2_bfa8837525934900af780fd621f0428b_externalid": {
+            "defaultValue": "/subscriptions/936578c0-028f-4038-a9ec-8546f4dc8897/resourceGroups/muni/providers/Microsoft.Compute/disks/vm2_disk2_bfa8837525934900af780fd621f0428b",
+            "type": "String"
+        },
+        "networkInterfaces_myVMNic_externalid": {
+            "defaultValue": "/subscriptions/936578c0-028f-4038-a9ec-8546f4dc8897/resourceGroups/muni/providers/Microsoft.Network/networkInterfaces/myVMNic",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2022-11-01",
+            "name": "[parameters('virtualMachines_vm2_name')]",
+            "location": "eastus2",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D2s_v5"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-azure-edition",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_vm2_name'), '_disk1_d269507339044f6c8edd70b41106d97c')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "StandardSSD_LRS",
+                            "id": "[parameters('disks_vm2_disk1_d269507339044f6c8edd70b41106d97c_externalid')]"
+                        },
+                        "deleteOption": "Detach",
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": [
+                        {
+                            "lun": 0,
+                            "name": "[concat(parameters('virtualMachines_vm2_name'), '_disk2_bfa8837525934900af780fd621f0428b')]",
+                            "createOption": "Empty",
+                            "caching": "None",
+                            "managedDisk": {
+                                "storageAccountType": "Premium_LRS",
+                                "id": "[parameters('disks_vm2_disk2_bfa8837525934900af780fd621f0428b_externalid')]"
+                            },
+                            "deleteOption": "Detach",
+                            "diskSizeGB": 1023,
+                            "toBeDetached": false
+                        }
+                    ],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_vm2_name')]",
+                    "adminUsername": "username",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault"
+                        },
+                        "enableVMAgentPlatformUpdates": false
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[parameters('networkInterfaces_myVMNic_externalid')]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2022-11-01",
+            "name": "[concat(parameters('virtualMachines_vm2_name'), '/MyCustomScript')]",
+            "location": "eastus2",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_vm2_name'))]"
+            ],
+            "properties": {
+                "autoUpgradeMinorVersion": true,
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.4",
+                "settings": {
+                    "fileUris": [
+                        "https://storagek12345.blob.core.windows.net/script2/script.ps1"
+                    ],
+                    "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File script.ps1 vm2username"
+                },
+                "protectedSettings": {}
+            }
+        }
+    ]
+}
